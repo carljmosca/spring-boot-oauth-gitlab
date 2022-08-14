@@ -14,6 +14,8 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<docker.credentials.username>xxx</docker.credentials.username>
+		<docker.credentials.password>xxx</docker.credentials.password>
 	</properties>
 	<dependencies>
 		<dependency>
