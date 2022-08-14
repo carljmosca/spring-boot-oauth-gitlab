@@ -9,13 +9,17 @@
 	</parent>
 	<groupId>com.moscaville</groupId>
 	<artifactId>spring-boot-oauth-gitlab</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-snapshot</version>
 	<name>spring-boot-oauth-gitlab</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<docker.credentials.username>xxx</docker.credentials.username>
-		<docker.credentials.password>xxx</docker.credentials.password>
+		<docker.image.repository>ghcr.io/carljmosca</docker.image.repository>
+		<docker.image.name>hello-gitlab</docker.image.name>
+		<docker.image.version>1</docker.image.version>
+		<spring-boot.build-image.imageName>${docker.image.repository}/${docker.image.name}:${project.verion}-${docker.image.version}</spring-boot.build-image.imageName>
+		<docker.publish.credentials.username>xxx</docker.publish.credentials.username>
+		<docker.publish.credentials.password>xxx</docker.publish.credentials.password>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -55,13 +59,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<mainClass>com.moscaville.springbootoauthgitlab.SpringBootOauthGitlabApplication</mainClass>
 					<image>
 						<publish>true</publish>
 					</image>
 					<docker>
 						<publishRegistry>
-							<username>${docker.credentials.username}</username>
-							<password>${docker.credentials.password}</password>
+							<username>${docker.publish.credentials.username}</username>
+							<password>${docker.publish.credentials.password}</password>
 						</publishRegistry>
 					</docker>
 				</configuration>
