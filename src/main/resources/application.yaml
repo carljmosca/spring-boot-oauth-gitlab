@@ -1,0 +1,20 @@
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          gitlab:
+            client-name: some-app
+            client-id: 123
+            client-secret: 456
+            authorization-grant-type: authorization_code
+            scope: openid, read_user, profile, email
+        provider:
+          gitlab:
+            issuer-uri: https://gitlab.com
+            authorization-uri: https://gitlab.com/oauth/authorize
+            token-uri: https://gitlab.com/oauth/token
+            user-info-uri: https://gitlab.com/oauth/userinfo
+            jwk-set-uri: https://gitlab.com/oauth/discovery/keys
+            user-name-attribute: name
