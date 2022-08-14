@@ -5,12 +5,13 @@
  jobs:
    docker:
      runs-on: ubuntu-latest
-    #  strategy:
-    #    fail-fast: false
-    #    matrix:
-    #      include:
-    #        - context: .    
-    #          dockerfile: Dockerfile
+     strategy:
+       fail-fast: false
+       matrix:
+         include:
+           - context: .    
+             dockerfile: Dockerfile
+             image: ghcr.io/${{ github.repository_owner }}/hello-gitlab
      permissions:
        contents: read
        packages: write     
@@ -49,9 +50,11 @@
            java-version: '17'
            distribution: 'zulu'
        - name: Build with Maven
+         with:
+           platforms: 'amd64,arm64'
          run: >
            mvn package
-           "-Dspring-boot.build-image.imageName=ghcr.io/${{ github.repository_owner }}/hello-gitlab:${{ steps.meta.outputs.tags }}"
+           "-Dspring-boot.build-image.imageName=${{ matrix.image }}:${{ steps.meta.outputs.tags }}"
            "-Ddocker.publishRegistry.username=${{ secrets.CR_USERNAME }}"
            "-Ddocker.publishRegistry.password=${{ secrets.CR_PAT }}"            
         #  with:
