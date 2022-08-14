@@ -49,14 +49,13 @@
          with:
            java-version: '17'
            distribution: 'zulu'
-       - name: Build with Maven
-         with:
            platforms: 'amd64,arm64'
-           run: >
-             mvn package
-             "-Dspring-boot.build-image.imageName=${{ steps.meta.outputs.tags }}"
-             "-Ddocker.publishRegistry.username=${{ secrets.CR_USERNAME }}"
-             "-Ddocker.publishRegistry.password=${{ secrets.CR_PAT }}"            
+       - name: Build with Maven
+         run: >
+           mvn package
+           "-Dspring-boot.build-image.imageName=${{ steps.meta.outputs.tags }}"
+           "-Ddocker.publishRegistry.username=${{ secrets.CR_USERNAME }}"
+           "-Ddocker.publishRegistry.password=${{ secrets.CR_PAT }}"            
         #  with:
         #    context: ./${{ matrix.context }}/
         #    secrets: |
