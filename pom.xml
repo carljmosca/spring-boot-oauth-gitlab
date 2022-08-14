@@ -14,7 +14,6 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<spring-boot.build-image.imageName>carljmosca/hello-gitlab</spring-boot.build-image.imageName>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -57,12 +56,6 @@
 					<image>
 						<publish>true</publish>
 					</image>
-					<docker>
-						<publishRegistry>
-							<username>${docker.publishRegistry.username}</username>
-							<password>${docker.publishRegistry.password}</password>
-						</publishRegistry>
-					</docker>
 				</configuration>
 				<executions>
 					<execution>
