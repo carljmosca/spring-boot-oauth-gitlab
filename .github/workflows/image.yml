@@ -10,9 +10,9 @@
        matrix:
          include:
            - image: ghcr.io/${{ github.repository_owner }}/hello-gitlab
-             platform: amd64
+             architecture: amd64
            - image: ghcr.io/${{ github.repository_owner }}/hello-gitlab
-             platform: arm64  
+             architecture: arm64  
      permissions:
        contents: read
        packages: write     
@@ -50,10 +50,10 @@
          with:
            java-version: '17'
            distribution: 'zulu'
-           platforms: 'amd64,arm64'
+           architecture: ${{ matrix.architecture }}
        - name: Build with Maven
          run: |
            mvn package \
-           -Dspring-boot.build-image.imageName=${{ matrix.image }}:${{ matrix.platform }} \
+           -Dspring-boot.build-image.imageName=${{ matrix.image }}:${{ matrix.architecture }} \
            -Ddocker.credentials.username=${{ secrets.CR_USERNAME }} \
            -Ddocker.credentials.password=${{ secrets.CR_PAT }}           
