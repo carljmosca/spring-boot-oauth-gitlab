@@ -9,9 +9,10 @@
        fail-fast: false
        matrix:
          include:
-           - context: .    
-             dockerfile: Dockerfile
-             image: ghcr.io/${{ github.repository_owner }}/hello-gitlab
+           - image: ghcr.io/${{ github.repository_owner }}/hello-gitlab
+             platform: amd64
+           - image: ghcr.io/${{ github.repository_owner }}/hello-gitlab
+             platform: arm64  
      permissions:
        contents: read
        packages: write     
@@ -53,15 +54,6 @@
        - name: Build with Maven
          run: |
            mvn package \
-           -Dspring-boot.build-image.imageName=${{ matrix.image }} \
+           -Dspring-boot.build-image.imageName=${{ matrix.image }}:${{ matrix.platform }} \
            -Ddocker.credentials.username=${{ secrets.CR_USERNAME }} \
-           -Ddocker.credentials.password=${{ secrets.CR_PAT }}      
-        #  with:
-        #    context: ./${{ matrix.context }}/
-        #    secrets: |
-        #     GIT_AUTH_TOKEN=${{ secrets.CR_PAT }} 
-        #    file: ${{ matrix.dockerfile }}
-        #    platforms: 'amd64,arm64'
-        #    push: true
-        #    tags: ${{ steps.meta.outputs.tags }}
-        #    labels: ${{ steps.meta.outputs.labels }}         
+           -Ddocker.credentials.password=${{ secrets.CR_PAT }}           
