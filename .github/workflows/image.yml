@@ -22,7 +22,7 @@
        - name: Set up QEMU
          uses: docker/setup-qemu-action@v2
          with:
-           platforms: 'amd64,aarchrm64'     
+           platforms: 'amd64,aarch64'     
       #  - name: Docker meta
       #    id: meta
       #    uses: docker/metadata-action@v4
