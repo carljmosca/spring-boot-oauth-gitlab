@@ -51,10 +51,10 @@
            distribution: 'zulu'
            platforms: 'amd64,arm64'
        - name: Build with Maven
-         run: >
-           mvn package
-           -Dspring-boot.build-image.imageName=${{ steps.meta.outputs.tags }}
-           -Ddocker.credentials.username=${{ secrets.CR_USERNAME }}
+         run: |
+           mvn package \
+           -Dspring-boot.build-image.imageName=${{ steps.meta.outputs.tags }} \
+           -Ddocker.credentials.username=${{ secrets.CR_USERNAME }} \
            -Ddocker.credentials.password=${{ secrets.CR_PAT }}          
         #  with:
         #    context: ./${{ matrix.context }}/
