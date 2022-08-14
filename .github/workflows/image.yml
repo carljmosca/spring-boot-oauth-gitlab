@@ -22,7 +22,7 @@
        - name: Set up QEMU
          uses: docker/setup-qemu-action@v2
          with:
-           platforms: 'arm64,arm'     
+           platforms: 'amd64,arm64'     
       #  - name: Docker meta
       #    id: meta
       #    uses: docker/metadata-action@v4
@@ -54,6 +54,6 @@
        - name: Build with Maven
          run: |
            mvn package \
-           -Dspring-boot.build-image.imageName=${{ matrix.image }}:${{ matrix.architecture }} \
+           -Dspring-boot.build-image.imageName=${{ matrix.image }}:${{ github.run_id }} \
            -Ddocker.credentials.username=${{ secrets.CR_USERNAME }} \
            -Ddocker.credentials.password=${{ secrets.CR_PAT }}           
