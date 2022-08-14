@@ -68,9 +68,9 @@
 							<username>${docker.publish.credentials.username}</username>
 							<password>${docker.publish.credentials.password}</password>
 						</publishRegistry>
-					</docker>
+					</docker> -->
 				</configuration>
-				<executions>
+				<!-- <executions>
 					<execution>
 						<goals>
 							<goal>build-image</goal>
