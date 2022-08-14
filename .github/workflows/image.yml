@@ -50,8 +50,8 @@
            java-version: '17'
            distribution: 'zulu'
        - name: Build with Maven
-         with:
-           platforms: 'amd64,arm64'
+        #  with:
+        #    platforms: 'amd64,arm64'
          run: >
            mvn package
            "-Dspring-boot.build-image.imageName=${{ matrix.image }}:${{ steps.meta.outputs.tags }}"
