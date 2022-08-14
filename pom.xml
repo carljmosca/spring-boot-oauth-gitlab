@@ -56,6 +56,12 @@
 					<image>
 						<publish>true</publish>
 					</image>
+					<docker>
+						<publishRegistry>
+							<username>${docker.credentials.username}</username>
+							<password>${docker.credentials.password}</password>
+						</publishRegistry>
+					</docker>
 				</configuration>
 				<executions>
 					<execution>
