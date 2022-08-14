@@ -54,7 +54,7 @@
         #    platforms: 'amd64,arm64'
          run: >
            mvn package
-           "-Dspring-boot.build-image.imageName=${{ matrix.image }}:${{ steps.meta.outputs.tags }}"
+           "-Dspring-boot.build-image.imageName=${{ steps.meta.outputs.tags }}"
            "-Ddocker.publishRegistry.username=${{ secrets.CR_USERNAME }}"
            "-Ddocker.publishRegistry.password=${{ secrets.CR_PAT }}"            
         #  with:
