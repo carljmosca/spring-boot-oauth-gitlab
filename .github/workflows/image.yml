@@ -54,8 +54,8 @@
          run: >
            mvn package
            -Dspring-boot.build-image.imageName=${{ steps.meta.outputs.tags }}
-           -Ddocker.publishRegistry.username=${{ secrets.CR_USERNAME }}
-           -Ddocker.publishRegistry.password=${{ secrets.CR_PAT }}          
+           -Ddocker.credentials.username=${{ secrets.CR_USERNAME }}
+           -Ddocker.credentials.password=${{ secrets.CR_PAT }}          
         #  with:
         #    context: ./${{ matrix.context }}/
         #    secrets: |
