@@ -10,7 +10,7 @@
        matrix:
          include:
            - image: ghcr.io/${{ github.repository_owner }}/hello-gitlab
-             architecture: amd64
+             architecture: x64
            - image: ghcr.io/${{ github.repository_owner }}/hello-gitlab
              architecture: aarch64
      permissions:
