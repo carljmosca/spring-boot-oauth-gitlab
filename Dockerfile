@@ -9,9 +9,11 @@ RUN mv apache-maven-$MAVEN_VERSION /usr/local
 RUN mkdir /home/dev
 COPY . /home/dev
 WORKDIR /home/dev
+#RUN echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 RUN /usr/local/apache-maven-$MAVEN_VERSION/bin/mvn package
 
 FROM gcr.io/distroless/java17-debian11
+#LABEL org.label-schema.version=$BUILD_VERSION
 COPY --from=build-env /home/dev/target/*.jar /app/main.jar
 WORKDIR /app
 CMD ["main.jar"]
