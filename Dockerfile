@@ -1,4 +1,18 @@
-FROM registry.access.redhat.com/ubi8/openjdk-17:1.14-3
+FROM amazoncorretto:17.0.4-al2 AS build-env
 
-RUN git clone 
-CWD 
+ENV MAVEN_VERSION=3.8.6
+
+RUN yum install -y tar gzip
+RUN curl -o apache-maven-$MAVEN_VERSION-bin.tar.gz https://dlcdn.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
+RUN tar xzvf apache-maven-$MAVEN_VERSION-bin.tar.gz
+RUN mv apache-maven-$MAVEN_VERSION /usr/local
+RUN mkdir /home/dev
+COPY . /home/dev
+WORKDIR /home/dev
+RUN /usr/local/apache-maven-$MAVEN_VERSION/bin/mvn package
+
+FROM gcr.io/distroless/java17-debian11
+COPY --from=build-env /home/dev/target/*.jar /app/main.jar
+WORKDIR /app
+CMD ["main.jar"]
+
