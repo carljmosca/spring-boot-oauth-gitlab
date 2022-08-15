@@ -33,9 +33,16 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITLAB_CLIENT_NAME
+              value: {{ .Values.spring.security.oauth2.client.registration.gitlab.client.name }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITLAB_CLIENT_ID
+              value: {{ .Values.spring.security.oauth2.client.registration.gitlab.client.id }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITLAB_CLIENT_SECRET
+              value: {{ .Values.spring.security.oauth2.client.registration.gitlab.client.secret}}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             httpGet:
